@@ -16,6 +16,19 @@ public class CollectorEx {
                         ));
         System.out.println(collect);
 
+        String teeingmaxmin = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+                .collect(
+                        Collectors.teeing(
+                                Collectors.maxBy(Integer::compareTo),
+                                Collectors.minBy(Integer::compareTo),
+                                (min, max) -> {
+                                    return "min->" + min + "max-" + max;
+                                }
+                        )
+                );
+
+        System.out.println(teeingmaxmin);
+
         Map<Boolean, Long> odc = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9)
                 .collect(
                         Collectors.partitioningBy(i -> i % 2 == 0, Collectors.counting())
