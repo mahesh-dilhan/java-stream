@@ -69,6 +69,20 @@ public class CollectorEx {
         );
         System.out.println(cg);
 
+
+        Map<String, String> cp = Country.countryStream.stream().collect(
+                Collectors.groupingBy(c -> c.name, Collectors.teeing(
+                        Collectors.maxBy(Comparator.comparingInt(Country::getPositiveCases)),
+                        Collectors.minBy(Comparator.comparingInt(Country::getPositiveCases)),
+                        (min, max) -> {
+                            return "Min" + min + "Max" + max;
+                        }
+                        )
+
+                )
+        );
+
+        System.out.println(cp);
     }
 
 
