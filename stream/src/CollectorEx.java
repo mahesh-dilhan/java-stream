@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -57,6 +58,17 @@ public class CollectorEx {
         );
 
         System.out.println(mpp);
+
+
+        ConcurrentMap<String, Integer> cg = Country.countryStream.parallelStream().collect(
+                Collectors.groupingByConcurrent(c -> c.name,
+                        Collectors.summingInt(Country::getPositiveCases)
+
+                )
+
+        );
+        System.out.println(cg);
+
     }
 
 
