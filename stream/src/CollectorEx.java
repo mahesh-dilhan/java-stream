@@ -48,6 +48,15 @@ public class CollectorEx {
         System.out.println(hrp);
 
 
+        Map<String, Integer> mpp = Country.countryStream.stream().collect(
+                Collectors.groupingBy(c -> c.name,
+                        Collectors.summingInt(Country::getPositiveCases)
+
+                )
+
+        );
+
+        System.out.println(mpp);
     }
 
 
