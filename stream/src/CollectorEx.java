@@ -1,5 +1,4 @@
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -27,5 +26,28 @@ public class CollectorEx {
                         Collectors.groupingBy(Function.identity())
                 );
         System.out.println(iden);
+
+
+        Map<String, Optional<Country>> mp = Country.countryStream.stream().collect(
+                Collectors.groupingBy(c -> c.name, Collectors.maxBy(Comparator.comparingInt(Country::getPositiveCases)))
+
+
+        );
+        System.out.println(mp);
+
+//        countryStream.collect(
+//        Collectors.partitioningBy(
+//                Country::getName,
+//                Collectors.collectingAndThen(
+//                        Collectors.maxBy(
+//                                Comparator.comparingInt(Country::getPositiveCases)
+//                        )
+//                )
+//            )
+//        );
+
     }
+
+
+
 }
