@@ -25,7 +25,7 @@ public class Country {
     }
     @Override
     public String toString() {
-        return name;
+        return new StringBuilder().append(name).append("-"+state).append("-"+positiveCases).toString();
     }
 
    public final static List<Country> countryStream = Arrays.asList(

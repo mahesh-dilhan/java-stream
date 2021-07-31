@@ -29,22 +29,24 @@ public class CollectorEx {
 
 
         Map<String, Optional<Country>> mp = Country.countryStream.stream().collect(
-                Collectors.groupingBy(c -> c.name, Collectors.maxBy(Comparator.comparingInt(Country::getPositiveCases)))
+                Collectors.groupingBy(c -> c.name,
+                        Collectors.maxBy(Comparator.comparingInt(Country::getPositiveCases)))
 
 
         );
         System.out.println(mp);
 
-//        countryStream.collect(
-//        Collectors.partitioningBy(
-//                Country::getName,
-//                Collectors.collectingAndThen(
-//                        Collectors.maxBy(
-//                                Comparator.comparingInt(Country::getPositiveCases)
-//                        )
-//                )
-//            )
-//        );
+        Map<String, Country> hrp = Country.countryStream.stream().collect(
+                Collectors.groupingBy(c -> c.name,
+                        Collectors.collectingAndThen(
+                                Collectors.maxBy(Comparator.comparingInt(Country::getPositiveCases))
+                                , Optional::get
+                        )
+                )
+
+        );
+        System.out.println(hrp);
+
 
     }
 
