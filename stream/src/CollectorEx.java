@@ -1,4 +1,6 @@
+import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -19,5 +21,11 @@ public class CollectorEx {
                         Collectors.partitioningBy(i -> i % 2 == 0, Collectors.counting())
                 );
         System.out.println(odc);
+
+        Map<Integer, List<Integer>> iden = Stream.of(2, 2, 3, 3, 5, 6, 8, 8, 9)
+                .collect(
+                        Collectors.groupingBy(Function.identity())
+                );
+        System.out.println(iden);
     }
 }
